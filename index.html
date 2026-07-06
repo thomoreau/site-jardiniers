@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Jardiniers des Collines — Entretien de jardins sur les collines niçoises</title>
+<meta name="description" content="Raphaël & Thomas, jardiniers sur les collines niçoises : débroussaillage, taille de haies, élagage, aménagement extérieur. Nice Nord, Colomars, Aspremont, Carros et alentours.">
+<style>
+  :root{
+    --vert-fonce:#2d4a2b;
+    --vert:#4a7c45;
+    --vert-clair:#8fbc8a;
+    --olive:#6b7b3f;
+    --terre:#a67c52;
+    --creme:#faf6ee;
+    --sable:#f0e8d8;
+    --texte:#33362e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:Georgia,'Times New Roman',serif;color:var(--texte);background:var(--creme);line-height:1.6}
+  h1,h2,h3{font-weight:normal}
+  h2{font-size:2rem;color:var(--vert-fonce);text-align:center;margin-bottom:.5rem}
+  .sous-titre{text-align:center;color:var(--olive);font-style:italic;margin-bottom:2.5rem}
+  section{padding:4rem 1.5rem;max-width:1100px;margin:0 auto}
+  .btn{display:inline-block;background:var(--vert);color:#fff;padding:.9rem 2rem;border-radius:50px;text-decoration:none;font-size:1.1rem;transition:background .2s;border:none;cursor:pointer}
+  .btn:hover{background:var(--vert-fonce)}
+
+  nav{position:sticky;top:0;background:rgba(250,246,238,.95);border-bottom:1px solid var(--sable);z-index:10;padding:.7rem 1rem;display:flex;justify-content:center;flex-wrap:wrap;gap:.3rem 1.3rem}
+  nav a{color:var(--vert-fonce);text-decoration:none;font-size:.95rem}
+  nav a:hover{color:var(--terre)}
+
+  header{background:linear-gradient(rgba(45,74,43,.75),rgba(45,74,43,.75)),
+    repeating-linear-gradient(45deg,#4a7c45,#4a7c45 20px,#436f3e 20px,#436f3e 40px);
+    color:#fff;text-align:center;padding:5.5rem 1.5rem}
+  header h1{font-size:2.7rem;margin-bottom:.6rem;text-shadow:1px 1px 4px rgba(0,0,0,.4)}
+  header p.tagline{font-size:1.25rem;font-style:italic;margin-bottom:.4rem;color:#e8f0e6}
+  header p.zone-tag{font-size:1rem;margin-bottom:2rem;color:#cfe0cc}
+  header .tel{display:block;margin-top:1rem;color:#fff;font-size:1.4rem;text-decoration:none;letter-spacing:1px}
+
+  .profils{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+  .carte{background:#fff;border-radius:14px;box-shadow:0 3px 12px rgba(45,74,43,.12);overflow:hidden}
+  .carte .photo-profil{height:220px;background:var(--sable);display:flex;align-items:center;justify-content:center;color:var(--terre);font-style:italic;text-align:center;padding:1rem}
+  .carte .photo-profil img{width:100%;height:100%;object-fit:cover}
+  .carte-corps{padding:1.5rem}
+  .carte h3{color:var(--vert-fonce);font-size:1.35rem;margin-bottom:.2rem}
+  .carte .role{color:var(--olive);font-style:italic;font-size:.95rem;margin-bottom:.8rem}
+
+  .grille-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+  .service{background:#fff;border-left:5px solid var(--vert-clair);border-radius:8px;padding:1.2rem 1.4rem;box-shadow:0 2px 8px rgba(45,74,43,.08)}
+  .service h3{color:var(--vert-fonce);font-size:1.1rem;margin-bottom:.4rem}
+  .service p{font-size:.95rem}
+  .emoji{font-size:1.6rem;display:block;margin-bottom:.4rem}
+
+  .avant-apres{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+  .realisation{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(45,74,43,.12)}
+  .paire{display:grid;grid-template-columns:1fr 1fr}
+  .ph{height:190px;display:flex;align-items:center;justify-content:center;text-align:center;font-style:italic;font-size:.9rem;padding:.8rem;overflow:hidden}
+  .ph img{width:100%;height:100%;object-fit:cover}
+  .ph.avec-img{padding:0}
+  .ph.avant{background:#e0d6c3;color:#8a7355}
+  .ph.apres{background:#d4e6d0;color:var(--vert)}
+  .etiquette{font-weight:bold;display:block;font-style:normal;text-transform:uppercase;letter-spacing:1px;font-size:.75rem;margin-bottom:.3rem}
+  .realisation figcaption{padding:1rem 1.3rem;font-size:.95rem}
+
+  .tarifs-fond{background:var(--vert-fonce);color:#fff;max-width:none}
+  .tarifs-fond h2{color:#fff}
+  .tarifs-fond .sous-titre{color:var(--vert-clair)}
+  .tarifs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;max-width:750px;margin:0 auto}
+  .tarif{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:2rem;text-align:center}
+  .tarif .prix{font-size:2.6rem;margin:.5rem 0}
+  .tarif ul{list-style:none;margin-top:1rem;font-size:.95rem}
+  .tarif li{padding:.3rem 0;border-bottom:1px dashed rgba(255,255,255,.2)}
+  .note-tarif{text-align:center;margin-top:2rem;font-size:.9rem;color:var(--vert-clair);font-style:italic;max-width:700px;margin-left:auto;margin-right:auto}
+
+  .outils{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
+  .outil{background:#fff;border:1px solid var(--vert-clair);color:var(--vert-fonce);padding:.5rem 1.1rem;border-radius:50px;font-size:.95rem}
+
+  .zone-liste{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-bottom:1.5rem}
+  .commune{background:var(--sable);padding:.5rem 1.1rem;border-radius:50px;font-size:.95rem;color:var(--texte)}
+  .zone-note{text-align:center;font-style:italic;color:var(--olive)}
+
+  .atouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;text-align:center}
+  .atout .emoji{font-size:2rem}
+  .atout h3{color:var(--vert-fonce);font-size:1.05rem;margin:.4rem 0}
+  .atout p{font-size:.9rem}
+
+  .contact-fond{background:var(--sable);max-width:none;text-align:center}
+  .contact-fond .tel-gros{font-size:2rem;color:var(--vert-fonce);text-decoration:none;display:block;margin:1rem 0}
+  .etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:800px;margin:2.5rem auto 0;text-align:center}
+  .etape .num{display:inline-flex;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--vert);color:#fff;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.5rem}
+
+  footer{background:var(--vert-fonce);color:#cfe0cc;text-align:center;padding:1.5rem;font-size:.85rem}
+  footer a{color:#fff}
+
+  @media(max-width:600px){
+    header h1{font-size:2rem}
+    h2{font-size:1.6rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#services">Nos services</a>
+  <a href="#realisations">Avant / Après</a>
+  <a href="#tarifs">Tarifs</a>
+  <a href="#equipe">L'équipe</a>
+  <a href="#zone">Zone d'intervention</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<header>
+  <h1>🌿 <span data-champ="nom"></span></h1>
+  <p class="tagline" data-champ="tagline"></p>
+  <p class="zone-tag" data-champ="zones_resume"></p>
+  <a class="btn" href="#contact">Demander un devis gratuit</a>
+  <a class="tel lien-tel" href="#">📞 <span data-champ="telephone"></span></a>
+</header>
+
+<section id="services">
+  <h2>Ce que nous réalisons</h2>
+  <p class="sous-titre">Du simple entretien aux gros travaux de terrain, à deux nous venons à bout de tout.</p>
+  <div class="grille-services" id="liste-services"></div>
+</section>
+
+<section id="realisations">
+  <h2>Nos réalisations en images</h2>
+  <p class="sous-titre">Le résultat parle de lui-même : avant / après.</p>
+  <div class="avant-apres" id="liste-realisations"></div>
+</section>
+
+<section id="tarifs" class="tarifs-fond">
+  <h2>Nos tarifs, simples et sans surprise</h2>
+  <p class="sous-titre">Toujours à deux sur place : le travail avance deux fois plus vite.</p>
+  <div class="tarifs" id="liste-tarifs"></div>
+  <p class="note-tarif" data-champ="note_tarif"></p>
+</section>
+
+<section id="equipe">
+  <h2>Qui sommes-nous ?</h2>
+  <p class="sous-titre">Deux enfants du pays, passionnés de plein air.</p>
+  <div class="profils" id="liste-equipe"></div>
+</section>
+
+<section id="outils">
+  <h2>Notre matériel</h2>
+  <p class="sous-titre">Un équipement complet pour intervenir efficacement, même sur les terrains difficiles.</p>
+  <div class="outils" id="liste-outils"></div>
+</section>
+
+<section id="zone">
+  <h2>Notre zone d'intervention</h2>
+  <p class="sous-titre">Les collines niçoises et leurs villages, jusqu'à 45 minutes de route de Nice.</p>
+  <div class="zone-liste" id="liste-communes"></div>
+  <p class="zone-note" data-champ="note_zone"></p>
+</section>
+
+<section id="pourquoi">
+  <h2>Pourquoi nous choisir ?</h2>
+  <div class="atouts">
+    <div class="atout"><span class="emoji">👥</span><h3>Toujours à deux</h3><p>Deux paires de bras à chaque intervention : le chantier avance vite et bien.</p></div>
+    <div class="atout"><span class="emoji">🏔️</span><h3>Enfants du pays</h3><p>Nous connaissons les collines, leurs restanques, leur végétation et leurs accès difficiles.</p></div>
+    <div class="atout"><span class="emoji">🧰</span><h3>Matériel inclus</h3><p>Nous arrivons entièrement équipés, vous n'avez rien à fournir.</p></div>
+    <div class="atout"><span class="emoji">💬</span><h3>Devis gratuit</h3><p>Un appel, une visite, un prix clair. Sans engagement.</p></div>
+  </div>
+</section>
+
+<section id="contact" class="contact-fond">
+  <h2>Contactez-nous</h2>
+  <p class="sous-titre">Un appel suffit pour lancer votre projet.</p>
+  <a class="tel-gros lien-tel" href="#">📞 <span data-champ="telephone"></span></a>
+  <a class="btn lien-sms" href="#">Envoyer un SMS</a>
+  <div class="etapes">
+    <div class="etape"><span class="num">1</span><h3>Vous appelez</h3><p>Décrivez-nous votre projet en quelques mots.</p></div>
+    <div class="etape"><span class="num">2</span><h3>On passe voir</h3><p>Visite sur place et devis gratuit, sans engagement.</p></div>
+    <div class="etape"><span class="num">3</span><h3>On s'en occupe</h3><p>Nous intervenons à deux, matériel compris, et repartons avec les déchets verts.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>🌿 <span data-champ="nom"></span> — Raphaël &amp; Thomas · <a class="lien-tel" href="#" data-champ="telephone"></a></p>
+  <p>Collines niçoises &amp; alentours (jusqu'à 45 min de Nice)</p>
+</footer>
+
+<script>
+// Le contenu du site est chargé depuis content/site.json (modifiable via l'espace admin /admin).
+// Les valeurs ci-dessous servent uniquement de secours si le fichier JSON est introuvable
+// (par exemple en ouvrant index.html directement depuis l'ordinateur sans serveur).
+const CONTENU_SECOURS = {
+  general: { nom: "Les Jardiniers des Collines", tagline: "Entretien de jardins & travaux extérieurs sur les collines niçoises", zones_resume: "Nice Nord · Colomars · Aspremont · Castagniers · Carros · et alentours", telephone: "06 75 41 64 87" },
+  services: [], realisations: [], tarifs: [], equipe: [], outils: [], communes: [],
+  note_tarif: "", note_zone: ""
+};
+
+function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function render(d){
+  // Champs texte simples
+  const plats = {...d.general, note_tarif: d.note_tarif, note_zone: d.note_zone};
+  document.querySelectorAll('[data-champ]').forEach(el=>{ el.textContent = plats[el.dataset.champ] ?? ''; });
+
+  // Liens téléphone / SMS
+  const num = (d.general.telephone||'').replace(/\D/g,'');
+  const tel = 'tel:+33' + num.replace(/^0/,'');
+  document.querySelectorAll('.lien-tel').forEach(a=>a.href=tel);
+  document.querySelectorAll('.lien-sms').forEach(a=>a.href='sms:+33'+num.replace(/^0/,'')+'?body=Bonjour,%20je%20vous%20contacte%20pour%20des%20travaux%20de%20jardinage.');
+
+  // Titre de l'onglet
+  document.title = d.general.nom + ' — ' + d.general.tagline;
+
+  // Services
+  document.getElementById('liste-services').innerHTML = (d.services||[]).map(s=>`
+    <div class="service"><span class="emoji">${esc(s.emoji)}</span><h3>${esc(s.titre)}</h3><p>${esc(s.description)}</p></div>`).join('');
+
+  // Réalisations avant/après
+  const photo=(src,cls,texte)=> src
+    ? `<div class="ph ${cls} avec-img"><img src="${esc(src)}" alt="${texte}" loading="lazy"></div>`
+    : `<div class="ph ${cls}"><span><span class="etiquette">${texte}</span>📷 Photo à venir</span></div>`;
+  document.getElementById('liste-realisations').innerHTML = (d.realisations||[]).map(r=>`
+    <figure class="realisation">
+      <div class="paire">${photo(r.photo_avant,'avant','Avant')}${photo(r.photo_apres,'apres','Après')}</div>
+      <figcaption><strong>${esc(r.titre)}</strong> — ${esc(r.description)}</figcaption>
+    </figure>`).join('');
+
+  // Tarifs
+  document.getElementById('liste-tarifs').innerHTML = (d.tarifs||[]).map(t=>`
+    <div class="tarif"><h3>${esc(t.titre)}</h3><div class="prix">${esc(t.prix)}</div>
+    <ul>${(t.details||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('');
+
+  // Équipe
+  document.getElementById('liste-equipe').innerHTML = (d.equipe||[]).map(p=>`
+    <div class="carte">
+      <div class="photo-profil">${p.photo?`<img src="${esc(p.photo)}" alt="${esc(p.nom)}" loading="lazy">`:`📷 Photo de ${esc(p.nom.split(' ')[0])} à venir`}</div>
+      <div class="carte-corps"><h3>${esc(p.nom)}</h3><p class="role">${esc(p.role)}</p><p>${esc(p.description)}</p></div>
+    </div>`).join('');
+
+  // Outils
+  document.getElementById('liste-outils').innerHTML = (d.outils||[]).map(o=>`<span class="outil">${esc(o)}</span>`).join('');
+
+  // Communes
+  document.getElementById('liste-communes').innerHTML = (d.communes||[]).map(c=>`<span class="commune">${esc(c)}</span>`).join('');
+}
+
+fetch('content/site.json')
+  .then(r=>{ if(!r.ok) throw new Error(); return r.json(); })
+  .then(render)
+  .catch(()=>render(CONTENU_SECOURS));
+</script>
+
+</body>
+</html>
