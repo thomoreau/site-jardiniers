@@ -1,0 +1,36 @@
+{
+  "general": {
+    "nom": "Les Jardiniers des Collines",
+    "tagline": "Entretien de jardins & travaux extérieurs sur les collines niçoises",
+    "zones_resume": "Nice Nord · Colomars · Aspremont · Castagniers · Carros · et alentours",
+    "telephone": "06 75 41 64 87"
+  },
+  "services": [
+    { "emoji": "🌾", "titre": "Débroussaillage", "description": "Terrains en friche, restanques, talus. Mise en conformité avec les obligations légales de débroussaillement (zones à risque incendie)." },
+    { "emoji": "✂️", "titre": "Taille de haies & arbustes", "description": "Taille d'entretien ou de réduction, haies de toutes tailles, lauriers, cyprès, oliviers d'ornement." },
+    { "emoji": "🌳", "titre": "Élagage & petit abattage", "description": "Branches hautes à l'élagueuse sur perche, abattage de petits arbres à la tronçonneuse." },
+    { "emoji": "🍂", "titre": "Nettoyage & soufflage", "description": "Ramassage de feuilles, nettoyage de terrasses, allées et abords de piscine." },
+    { "emoji": "🧱", "titre": "Petits aménagements", "description": "Préparation et compactage de sol (plaque vibrante), allées, terrains de pétanque, petites terrasses." },
+    { "emoji": "🚛", "titre": "Évacuation des déchets verts", "description": "Nous repartons avec les végétaux coupés grâce à notre remorque : votre terrain reste propre." },
+    { "emoji": "🌱", "titre": "Remise en état de jardins", "description": "Jardins laissés à l'abandon, préparation avant vente ou location d'une maison." },
+    { "emoji": "🤝", "titre": "Autres projets extérieurs", "description": "Une idée en tête qui ne rentre dans aucune case ? Parlons-en, nous aimons les nouveaux défis." }
+  ],
+  "realisations": [
+    { "titre": "Débroussaillage complet", "description": "Restanques envahies rendues à nouveau accessibles.", "photo_avant": "", "photo_apres": "" },
+    { "titre": "Taille de haie", "description": "Reprise en main d'une haie non taillée depuis plusieurs années.", "photo_avant": "", "photo_apres": "" },
+    { "titre": "Création d'un terrain de pétanque", "description": "Terrassement, compactage et finitions.", "photo_avant": "", "photo_apres": "" },
+    { "titre": "Votre projet ici ?", "description": "Contactez-nous et votre jardin sera notre prochaine fierté.", "photo_avant": "", "photo_apres": "" }
+  ],
+  "tarifs": [
+    { "titre": "Demi-journée", "prix": "300 €", "details": ["2 jardiniers · ~4 heures", "Matériel professionnel inclus", "Idéal : haies, nettoyage, entretien"] },
+    { "titre": "Journée complète", "prix": "500 €", "details": ["2 jardiniers · journée entière", "Matériel professionnel inclus", "Idéal : débroussaillage, gros chantiers"] }
+  ],
+  "note_tarif": "Devis gratuit sur simple visite. Pour les chantiers de plusieurs jours, contactez-nous : nous établissons un prix ensemble.",
+  "equipe": [
+    { "nom": "Raphaël Klinkhamer", "role": "Professeur de piano & jardinier passionné", "description": "Passionné de jardinage depuis l'enfance, Raphaël cultive son amour des espaces verts entre ses cours de piano. Précis et méticuleux au clavier comme au taille-haie, il apporte à chaque chantier son sens du détail et sa connaissance des plantes de la région.", "photo": "" },
+    { "nom": "Thomas Moreau", "role": "L'énergie du village", "description": "Le reste de l'année dans des bureaux parisiens, Thomas retrouve chaque été son village des collines niçoises. Son terrain de pétanque terminé de ses propres mains, il cherche de nouveaux projets pour rester au grand air — et votre jardin pourrait bien être le prochain.", "photo": "" }
+  ],
+  "outils": ["🌾 Débroussailleuse", "✂️ Taille-haie", "🍃 Souffleuse", "🧱 Plaque vibrante", "🌳 Élagueuse sur perche", "🪚 Tronçonneuse", "⛏️ Pioche & outils manuels", "🛞 Brouette", "🚛 Remorque", "🪜 Escabeau"],
+  "communes": ["Nice Nord", "Fabron", "Saint-Pancrace", "Colomars", "Aspremont", "Castagniers", "Carros", "Saint-Blaise", "Tourrette-Levens", "Falicon", "Gattières", "La Gaude", "Levens", "Saint-Martin-du-Var"],
+  "note_zone": "Votre village n'est pas dans la liste ? Appelez-nous : si c'est à moins de 45 minutes de Nice, nous venons."
+}
