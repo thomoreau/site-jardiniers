@@ -1,0 +1,80 @@
+# ══════════════════════════════════════════════════════════════════
+#  Configuration de l'espace admin (Decap CMS)
+#  Les Jardiniers des Collines
+# ══════════════════════════════════════════════════════════════════
+
+# ⚠️ ÉTAPE OBLIGATOIRE :
+# Remplace TOUT le bloc "backend" ci-dessous par celui que DecapBridge
+# génère pour ton site (voir GUIDE-INSTALLATION.md, étape 4).
+backend:
+  name: git-gateway
+  repo: thomoreau/site-jardiniers
+  branch: main
+# ── fin du bloc à remplacer ──
+
+media_folder: "images/uploads"
+public_folder: "images/uploads"
+
+collections:
+  - name: "contenu"
+    label: "Contenu du site"
+    files:
+      - name: "site"
+        label: "🌿 Toutes les sections du site"
+        file: "content/site.json"
+        fields:
+
+          - label: "1 · Informations générales"
+            name: "general"
+            widget: object
+            fields:
+              - { label: "Nom du site", name: "nom", widget: string }
+              - { label: "Slogan (sous le nom)", name: "tagline", widget: string }
+              - { label: "Zones affichées en haut de page", name: "zones_resume", widget: string }
+              - { label: "Téléphone", name: "telephone", widget: string }
+
+          - label: "2 · Services proposés"
+            name: "services"
+            widget: list
+            summary: "{{fields.titre}}"
+            fields:
+              - { label: "Emoji", name: "emoji", widget: string, required: false, hint: "Un seul emoji, ex. 🌾" }
+              - { label: "Titre", name: "titre", widget: string }
+              - { label: "Description", name: "description", widget: text }
+
+          - label: "3 · Réalisations avant / après"
+            name: "realisations"
+            widget: list
+            summary: "{{fields.titre}}"
+            fields:
+              - { label: "Titre", name: "titre", widget: string }
+              - { label: "Description", name: "description", widget: text }
+              - { label: "Photo AVANT", name: "photo_avant", widget: image, required: false, hint: "Laisser vide pour afficher « Photo à venir »" }
+              - { label: "Photo APRÈS", name: "photo_apres", widget: image, required: false }
+
+          - label: "4 · Tarifs"
+            name: "tarifs"
+            widget: list
+            summary: "{{fields.titre}} — {{fields.prix}}"
+            fields:
+              - { label: "Titre", name: "titre", widget: string, hint: "Ex. Demi-journée" }
+              - { label: "Prix affiché", name: "prix", widget: string, hint: "Ex. 300 €" }
+              - { label: "Détails (ce qui est inclus)", name: "details", widget: list, hint: "Une ligne par élément" }
+
+          - { label: "Note sous les tarifs", name: "note_tarif", widget: text }
+
+          - label: "5 · L'équipe"
+            name: "equipe"
+            widget: list
+            summary: "{{fields.nom}}"
+            fields:
+              - { label: "Nom complet", name: "nom", widget: string }
+              - { label: "Rôle / sous-titre", name: "role", widget: string }
+              - { label: "Présentation", name: "description", widget: text }
+              - { label: "Photo", name: "photo", widget: image, required: false }
+
+          - { label: "6 · Matériel / outils", name: "outils", widget: list, hint: "Un outil par ligne (emoji + nom)" }
+
+          - { label: "7 · Communes couvertes", name: "communes", widget: list, hint: "Une commune par ligne" }
+
+          - { label: "Note sous la zone d'intervention", name: "note_zone", widget: text }
