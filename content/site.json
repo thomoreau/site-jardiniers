@@ -29,12 +29,6 @@
       "description": "Terrassement, compactage et finitions.",
       "photo_avant": "images/uploads/gemini_generated_image_pbvjctpbvjctpbvj-1-.jpg",
       "photo_apres": "images/uploads/img_5997-2-.jpg"
-    },
-    {
-      "titre": "Votre projet ici ?",
-      "description": "Contactez-nous et votre jardin sera notre prochaine fierté.",
-      "photo_avant": "",
-      "photo_apres": ""
     }
   ],
   "general": {
@@ -99,42 +93,26 @@
     {
       "emoji": "🌾",
       "titre": "Débroussaillage",
-      "description": "Terrains en friche, restanques, talus. Limitez les risques d'incendies pour cet été."
+      "description": "Terrains en friche, restanques, talus. Limitez les risques d'incendies pour cet été.",
+      "image": ""
     },
     {
       "emoji": "✂️",
-      "titre": "Taille de haies & arbustes",
-      "description": "Taille d'entretien ou de réduction, haies de toutes tailles, lauriers, cyprès, oliviers d'ornement."
-    },
-    {
-      "emoji": "🌳",
-      "titre": "Élagage & petit abattage",
-      "description": "Branches hautes à l'élagueuse sur perche, abattage de petits arbres à la tronçonneuse."
+      "titre": "Taille de haies & petits abattages",
+      "description": "Taille d'entretien ou de réduction de haies, élagage des branches hautes à la perche et abattage de petits arbres à la tronçonneuse.",
+      "image": ""
     },
     {
       "emoji": "🍂",
-      "titre": "Nettoyage & soufflage",
-      "description": "Ramassage de feuilles, nettoyage de terrasses, allées et abords de piscine."
-    },
-    {
-      "emoji": "🧱",
-      "titre": "Petits aménagements",
-      "description": "Préparation et compactage de sol (plaque vibrante), allées, terrains de pétanque, petites terrasses."
-    },
-    {
-      "emoji": "🚛",
-      "titre": "Évacuation des déchets verts",
-      "description": "Nous repartons avec les végétaux coupés grâce à notre remorque : votre terrain reste propre."
+      "titre": "Nettoyage & aménagement jardin / terrasse",
+      "description": "Ramassage de feuilles, nettoyage de terrasses et allées, petits aménagements : compactage de sol, allées, terrains de pétanque, petites terrasses.",
+      "image": ""
     },
     {
       "emoji": "🌱",
       "titre": "Remise en état de jardins",
-      "description": "Jardins laissés à l'abandon, préparation avant vente ou location d'une maison."
-    },
-    {
-      "emoji": "🤝",
-      "titre": "Autres projets extérieurs",
-      "description": "Une idée en tête qui ne rentre dans aucune case ? Parlons-en, nous aimons les nouveaux défis."
+      "description": "Jardins laissés à l'abandon, préparation avant vente ou location d'une maison.",
+      "image": ""
     }
   ]
 }
