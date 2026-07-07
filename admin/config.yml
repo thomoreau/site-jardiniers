@@ -59,6 +59,7 @@ collections:
               - { label: "Emoji", name: "emoji", widget: string, required: false, hint: "Un seul emoji, ex. 🌾" }
               - { label: "Titre", name: "titre", widget: string }
               - { label: "Description", name: "description", widget: text }
+              - { label: "Photo (carrée de préférence)", name: "image", widget: image, required: false }
 
           - label: "3 · Réalisations avant / après"
             name: "realisations"
