@@ -56,8 +56,12 @@
 
   .avant-apres{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:2rem}
   .realisation{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(45,74,43,.12)}
-  .paire{display:grid;grid-template-columns:1fr 1fr}
-  .ph{height:380px;display:flex;align-items:center;justify-content:center;text-align:center;font-style:italic;font-size:.9rem;padding:.8rem;overflow:hidden}
+  .paire{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;padding:.9rem}
+  .cote{border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(45,74,43,.2)}
+  .cote-titre{text-align:center;font-weight:bold;text-transform:uppercase;letter-spacing:2px;font-size:.8rem;padding:.4rem;color:#fff}
+  .cote-titre.avant{background:var(--terre)}
+  .cote-titre.apres{background:var(--vert)}
+  .ph{height:340px;display:flex;align-items:center;justify-content:center;text-align:center;font-style:italic;font-size:.9rem;padding:.8rem;overflow:hidden}
   .ph img{width:100%;height:100%;object-fit:cover}
   .ph.avec-img{padding:0}
   .ph.avant{background:#e0d6c3;color:#8a7355}
@@ -102,7 +106,9 @@
     section{padding:2.5rem 1rem}
     nav{gap:.2rem .9rem}
     nav a{font-size:.85rem}
-    .ph{height:230px}
+    .ph{height:200px}
+    .paire{gap:.5rem;padding:.5rem}
+    .cote-titre{font-size:.7rem;letter-spacing:1px}
     .tarif{padding:1.5rem}
     .tarif .prix{font-size:2.2rem}
     .contact-fond .tel-gros{font-size:1.6rem}
@@ -225,9 +231,11 @@ function render(d){
     <div class="service">${s.image?`<img class="service-photo" src="${esc(s.image)}" alt="${esc(s.titre)}" loading="lazy">`:`<div class="service-photo ph-vide">📷 Photo à venir</div>`}<h3>${esc(s.emoji)} ${esc(s.titre)}</h3><p>${esc(s.description)}</p></div>`).join('');
 
   // Réalisations avant/après
-  const photo=(src,cls,texte)=> src
-    ? `<div class="ph ${cls} avec-img"><img src="${esc(src)}" alt="${texte}" loading="lazy"></div>`
-    : `<div class="ph ${cls}"><span><span class="etiquette">${texte}</span>📷 Photo à venir</span></div>`;
+  const photo=(src,cls,texte)=>`
+    <div class="cote">
+      <div class="cote-titre ${cls}">${texte}</div>
+      ${src?`<div class="ph ${cls} avec-img"><img src="${esc(src)}" alt="${texte}" loading="lazy"></div>`:`<div class="ph ${cls}"><span>📷 Photo à venir</span></div>`}
+    </div>`;
   document.getElementById('liste-realisations').innerHTML = (d.realisations||[]).map(r=>`
     <figure class="realisation">
       <div class="paire">${photo(r.photo_avant,'avant','Avant')}${photo(r.photo_apres,'apres','Après')}</div>
