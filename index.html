@@ -38,7 +38,7 @@
   header p.zone-tag{font-size:1rem;margin-bottom:2rem;color:#cfe0cc}
   header .tel{display:block;margin-top:1rem;color:#fff;font-size:1.4rem;text-decoration:none;letter-spacing:1px}
 
-  .profils{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+  .profils{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:2rem}
   .carte{background:#fff;border-radius:14px;box-shadow:0 3px 12px rgba(45,74,43,.12);overflow:hidden}
   .carte .photo-profil{aspect-ratio:4/5;background:var(--sable);display:flex;align-items:center;justify-content:center;color:var(--terre);font-style:italic;text-align:center;padding:1rem}
   .carte .photo-profil img{width:100%;height:100%;object-fit:cover}
@@ -46,16 +46,18 @@
   .carte h3{color:var(--vert-fonce);font-size:1.35rem;margin-bottom:.2rem}
   .carte .role{color:var(--olive);font-style:italic;font-size:.95rem;margin-bottom:.8rem}
 
-  .grille-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+  .grille-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1.2rem}
   .service{background:#fff;border-left:5px solid var(--vert-clair);border-radius:8px;padding:1.2rem 1.4rem;box-shadow:0 2px 8px rgba(45,74,43,.08)}
   .service h3{color:var(--vert-fonce);font-size:1.1rem;margin-bottom:.4rem}
   .service p{font-size:.95rem}
   .emoji{font-size:1.6rem;display:block;margin-bottom:.4rem}
+  .service-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;margin-bottom:.9rem;display:block}
+  div.service-photo.ph-vide{background:var(--sable);color:var(--terre);display:flex;align-items:center;justify-content:center;font-style:italic}
 
-  .avant-apres{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+  .avant-apres{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:2rem}
   .realisation{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 3px 12px rgba(45,74,43,.12)}
   .paire{display:grid;grid-template-columns:1fr 1fr}
-  .ph{height:190px;display:flex;align-items:center;justify-content:center;text-align:center;font-style:italic;font-size:.9rem;padding:.8rem;overflow:hidden}
+  .ph{height:380px;display:flex;align-items:center;justify-content:center;text-align:center;font-style:italic;font-size:.9rem;padding:.8rem;overflow:hidden}
   .ph img{width:100%;height:100%;object-fit:cover}
   .ph.avec-img{padding:0}
   .ph.avant{background:#e0d6c3;color:#8a7355}
@@ -66,7 +68,7 @@
   .tarifs-fond{background:var(--vert-fonce);color:#fff;max-width:none}
   .tarifs-fond h2{color:#fff}
   .tarifs-fond .sous-titre{color:var(--vert-clair)}
-  .tarifs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;max-width:750px;margin:0 auto}
+  .tarifs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:2rem;max-width:750px;margin:0 auto}
   .tarif{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:2rem;text-align:center}
   .tarif .prix{font-size:2.6rem;margin:.5rem 0}
   .tarif ul{list-style:none;margin-top:1rem;font-size:.95rem}
@@ -80,22 +82,31 @@
   .commune{background:var(--sable);padding:.5rem 1.1rem;border-radius:50px;font-size:.95rem;color:var(--texte)}
   .zone-note{text-align:center;font-style:italic;color:var(--olive)}
 
-  .atouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;text-align:center}
+  .atouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1.5rem;text-align:center}
   .atout .emoji{font-size:2rem}
   .atout h3{color:var(--vert-fonce);font-size:1.05rem;margin:.4rem 0}
   .atout p{font-size:.9rem}
 
   .contact-fond{background:var(--sable);max-width:none;text-align:center}
   .contact-fond .tel-gros{font-size:2rem;color:var(--vert-fonce);text-decoration:none;display:block;margin:1rem 0}
-  .etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:800px;margin:2.5rem auto 0;text-align:center}
+  .etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:1.5rem;max-width:800px;margin:2.5rem auto 0;text-align:center}
   .etape .num{display:inline-flex;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--vert);color:#fff;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.5rem}
 
   footer{background:var(--vert-fonce);color:#cfe0cc;text-align:center;padding:1.5rem;font-size:.85rem}
   footer a{color:#fff}
 
   @media(max-width:600px){
+    header{padding:3.5rem 1rem}
     header h1{font-size:2rem}
     h2{font-size:1.6rem}
+    section{padding:2.5rem 1rem}
+    nav{gap:.2rem .9rem}
+    nav a{font-size:.85rem}
+    .ph{height:230px}
+    .tarif{padding:1.5rem}
+    .tarif .prix{font-size:2.2rem}
+    .contact-fond .tel-gros{font-size:1.6rem}
+    header .tel{font-size:1.2rem}
   }
 </style>
 </head>
@@ -211,7 +222,7 @@ function render(d){
 
   // Services
   document.getElementById('liste-services').innerHTML = (d.services||[]).map(s=>`
-    <div class="service"><span class="emoji">${esc(s.emoji)}</span><h3>${esc(s.titre)}</h3><p>${esc(s.description)}</p></div>`).join('');
+    <div class="service">${s.image?`<img class="service-photo" src="${esc(s.image)}" alt="${esc(s.titre)}" loading="lazy">`:`<div class="service-photo ph-vide">📷 Photo à venir</div>`}<h3>${esc(s.emoji)} ${esc(s.titre)}</h3><p>${esc(s.description)}</p></div>`).join('');
 
   // Réalisations avant/après
   const photo=(src,cls,texte)=> src
