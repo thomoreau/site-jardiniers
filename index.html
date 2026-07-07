@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Les Jardiniers des Collines — Entretien de jardins sur les collines niçoises</title>
 <meta name="description" content="Raphaël & Thomas, jardiniers sur les collines niçoises : débroussaillage, taille de haies, élagage, aménagement extérieur. Nice Nord, Colomars, Aspremont, Carros et alentours.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root{
     --vert-fonce:#2d4a2b;
@@ -26,7 +27,7 @@
   .btn{display:inline-block;background:var(--vert);color:#fff;padding:.9rem 2rem;border-radius:50px;text-decoration:none;font-size:1.1rem;transition:background .2s;border:none;cursor:pointer}
   .btn:hover{background:var(--vert-fonce)}
 
-  nav{position:sticky;top:0;background:rgba(250,246,238,.95);border-bottom:1px solid var(--sable);z-index:10;padding:.7rem 1rem;display:flex;justify-content:center;flex-wrap:wrap;gap:.3rem 1.3rem}
+  nav{position:sticky;top:0;background:rgba(250,246,238,.95);border-bottom:1px solid var(--sable);z-index:1000;padding:.7rem 1rem;display:flex;justify-content:center;flex-wrap:wrap;gap:.3rem 1.3rem}
   nav a{color:var(--vert-fonce);text-decoration:none;font-size:.95rem}
   nav a:hover{color:var(--terre)}
 
@@ -66,7 +67,6 @@
   .ph.avec-img{padding:0}
   .ph.avant{background:#e0d6c3;color:#8a7355}
   .ph.apres{background:#d4e6d0;color:var(--vert)}
-  .etiquette{font-weight:bold;display:block;font-style:normal;text-transform:uppercase;letter-spacing:1px;font-size:.75rem;margin-bottom:.3rem}
   .realisation figcaption{padding:1rem 1.3rem;font-size:.95rem}
 
   .tarifs-fond{background:var(--vert-fonce);color:#fff;max-width:none}
@@ -82,6 +82,7 @@
   .outils{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
   .outil{background:#fff;border:1px solid var(--vert-clair);color:var(--vert-fonce);padding:.5rem 1.1rem;border-radius:50px;font-size:.95rem}
 
+  #carte-zone{height:420px;border-radius:14px;box-shadow:0 3px 12px rgba(45,74,43,.12);margin-bottom:1.8rem;z-index:1}
   .zone-liste{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-bottom:1.5rem}
   .commune{background:var(--sable);padding:.5rem 1.1rem;border-radius:50px;font-size:.95rem;color:var(--texte)}
   .zone-note{text-align:center;font-style:italic;color:var(--olive)}
@@ -109,6 +110,7 @@
     .ph{height:200px}
     .paire{gap:.5rem;padding:.5rem}
     .cote-titre{font-size:.7rem;letter-spacing:1px}
+    #carte-zone{height:300px}
     .tarif{padding:1.5rem}
     .tarif .prix{font-size:2.2rem}
     .contact-fond .tel-gros{font-size:1.6rem}
@@ -119,8 +121,8 @@
 <body>
 
 <nav>
-  <a href="#services">Nos services</a>
   <a href="#realisations">Avant / Après</a>
+  <a href="#services">Nos services</a>
   <a href="#tarifs">Tarifs</a>
   <a href="#equipe">L'équipe</a>
   <a href="#zone">Zone d'intervention</a>
@@ -135,16 +137,16 @@
   <a class="tel lien-tel" href="#">📞 <span data-champ="telephone"></span></a>
 </header>
 
-<section id="services">
-  <h2>Ce que nous réalisons</h2>
-  <p class="sous-titre">Du simple entretien aux gros travaux de terrain, à deux nous venons à bout de tout.</p>
-  <div class="grille-services" id="liste-services"></div>
-</section>
-
 <section id="realisations">
   <h2>Nos réalisations en images</h2>
   <p class="sous-titre">Le résultat parle de lui-même : avant / après.</p>
   <div class="avant-apres" id="liste-realisations"></div>
+</section>
+
+<section id="services">
+  <h2>Ce que nous réalisons</h2>
+  <p class="sous-titre">Du simple entretien aux gros travaux de terrain, à deux nous venons à bout de tout.</p>
+  <div class="grille-services" id="liste-services"></div>
 </section>
 
 <section id="tarifs" class="tarifs-fond">
@@ -169,6 +171,7 @@
 <section id="zone">
   <h2>Notre zone d'intervention</h2>
   <p class="sous-titre">Les collines niçoises et leurs villages, jusqu'à 45 minutes de route de Nice.</p>
+  <div id="carte-zone"></div>
   <div class="zone-liste" id="liste-communes"></div>
   <p class="zone-note" data-champ="note_zone"></p>
 </section>
@@ -200,6 +203,7 @@
   <p>Collines niçoises &amp; alentours (jusqu'à 45 min de Nice)</p>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 // Le contenu du site est chargé depuis content/site.json (modifiable via l'espace admin /admin).
 // Les valeurs ci-dessous servent uniquement de secours si le fichier JSON est introuvable
@@ -265,6 +269,27 @@ fetch('content/site.json')
   .then(r=>{ if(!r.ok) throw new Error(); return r.json(); })
   .then(render)
   .catch(()=>render(CONTENU_SECOURS));
+
+// ─── Carte de la zone d'intervention ───
+if (window.L) {
+  const carte = L.map('carte-zone', {scrollWheelZoom:false}).setView([43.745, 7.22], 10);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(carte);
+
+  // Nice
+  L.marker([43.7009, 7.2683]).addTo(carte).bindPopup('<strong>Nice</strong>');
+
+  // Collines niçoises (cercle vert plein)
+  L.circle([43.76, 7.22], {radius: 7000, color: '#2d4a2b', weight: 3, fillColor: '#4a7c45', fillOpacity: .18})
+    .addTo(carte)
+    .bindTooltip('Collines niçoises', {permanent: true, direction: 'center', className: 'etiquette-carte'});
+
+  // Alentours ~20 km (cercle pointillé)
+  L.circle([43.7009, 7.2683], {radius: 20000, color: '#a67c52', weight: 2, dashArray: '8 8', fill: false})
+    .addTo(carte)
+    .bindTooltip('Alentours — 20 km', {permanent: true, direction: 'top', offset: [0, -150]});
+}
 </script>
 
 </body>
