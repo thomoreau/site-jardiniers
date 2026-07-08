@@ -9,7 +9,7 @@
     "⛏️ Pioche & outils manuels",
     "🛞 Brouette",
     "🚛 Remorque",
-    "🪜 Escabeau"
+    "🪜 Escabeau / Echelle"
   ],
   "realisations": [
     {
@@ -94,25 +94,25 @@
       "emoji": "🌾",
       "titre": "Débroussaillage",
       "description": "Terrains en friche, restanques, talus. Limitez les risques d'incendies pour cet été.",
-      "image": ""
+      "image": "images/uploads/debroussailleuse-thermique-62-cm-2-temps-debroussailleuse-essence-2en1-coupe-bordure-tete-double-fil-et-deux-lames-.jpg"
     },
     {
       "emoji": "✂️",
       "titre": "Taille de haies & petits abattages",
       "description": "Taille d'entretien ou de réduction de haies, élagage des branches hautes à la perche et abattage de petits arbres à la tronçonneuse.",
-      "image": ""
+      "image": "images/uploads/outil-multifonction-thermique-4en1-debroussailleuse-coupe-bordure-elagueuse-taille-haie-517-cm-2t-3cv-2-lames.jpg"
     },
     {
       "emoji": "🍂",
       "titre": "Nettoyage & aménagement jardin / terrasse",
       "description": "Ramassage de feuilles, nettoyage de terrasses et allées, petits aménagements : compactage de sol, allées, terrains de pétanque, petites terrasses.",
-      "image": ""
+      "image": "images/uploads/entretien-jardin-2.jpg"
     },
     {
       "emoji": "🌱",
       "titre": "Remise en état de jardins",
       "description": "Jardins laissés à l'abandon, préparation avant vente ou location d'une maison.",
-      "image": ""
+      "image": "images/uploads/6f1f82d8-187c-4db9-8732-76c46dbfdbca.webp"
     }
   ]
 }
