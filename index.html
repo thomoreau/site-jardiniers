@@ -104,6 +104,25 @@
   .etapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:1.5rem;max-width:800px;margin:2.5rem auto 0;text-align:center}
   .etape .num{display:inline-flex;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--vert);color:#fff;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.5rem}
 
+  .form-devis{max-width:640px;margin:0 auto;background:#fff;border-radius:14px;padding:2rem;box-shadow:0 3px 12px rgba(45,74,43,.12)}
+  .form-devis .champ{margin-bottom:1.6rem}
+  .form-devis .q{display:block;font-weight:bold;color:var(--vert-fonce);margin-bottom:.7rem;font-size:1.05rem}
+  .options-multi,.options-radio{display:flex;flex-wrap:wrap;gap:.6rem}
+  .chip-choix{display:inline-flex;align-items:center;gap:.35rem;background:var(--creme);border:1px solid var(--vert-clair);border-radius:50px;padding:.5rem 1.1rem;cursor:pointer;font-size:.95rem;transition:background .15s,color .15s,border-color .15s}
+  .chip-choix input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+  .chip-choix.actif{background:var(--vert);color:#fff;border-color:var(--vert)}
+  .form-devis select{width:100%;padding:.7rem .9rem;border:1px solid var(--vert-clair);border-radius:8px;font-family:inherit;font-size:1rem;background:#fff;color:var(--texte)}
+  .form-devis .btn{width:100%;margin-top:.5rem}
+  .devis-resultat{max-width:640px;margin:1.8rem auto 0;background:var(--sable);border-radius:14px;padding:1.8rem;text-align:center}
+  .devis-resultat h3{color:var(--vert-fonce);font-size:1.2rem}
+  .devis-resultat .montant{font-size:2.2rem;color:var(--vert-fonce);margin:.4rem 0 .2rem}
+  .devis-resultat .recap{text-align:left;font-size:.95rem;margin:1.3rem 0 .5rem;list-style:none}
+  .devis-resultat .recap li{padding:.3rem 0;border-bottom:1px dashed rgba(45,74,43,.2)}
+  .devis-resultat .recap li span{color:var(--olive)}
+  .devis-actions{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1.2rem}
+  .devis-actions .btn{margin:0}
+  .devis-resultat .avert{font-size:.85rem;color:var(--olive);font-style:italic;margin-top:1.2rem}
+
   footer{background:var(--vert-fonce);color:#cfe0cc;text-align:center;padding:1.5rem;font-size:.85rem}
   footer a{color:#fff}
 
@@ -131,6 +150,7 @@
   <a href="#realisations">Avant / Après</a>
   <a href="#services">Nos services</a>
   <a href="#tarifs">Tarifs</a>
+  <a href="#simulateur">Devis express</a>
   <a href="#equipe">L'équipe</a>
   <a href="#zone">Zone d'intervention</a>
   <a href="#contact">Contact</a>
@@ -161,6 +181,40 @@
   <p class="sous-titre">Toujours à deux sur place : le travail avance deux fois plus vite.</p>
   <div class="tarifs" id="liste-tarifs"></div>
   <p class="note-tarif" data-champ="note_tarif"></p>
+</section>
+
+<section id="simulateur">
+  <h2>Simulez votre devis en 30 secondes</h2>
+  <p class="sous-titre">Quelques questions rapides pour une estimation indicative. Le devis définitif reste gratuit et confirmé lors de la visite.</p>
+  <form id="form-devis" class="form-devis" novalidate>
+    <div class="champ">
+      <span class="q">1. Quels travaux souhaitez-vous ?</span>
+      <div class="options-multi" id="devis-services"></div>
+    </div>
+    <div class="champ">
+      <label class="q" for="devis-duree">2. Temps estimé pour le chantier</label>
+      <select id="devis-duree">
+        <option value="petit">Petit chantier — quelques heures</option>
+        <option value="demi" selected>Une demi-journée (~4 h)</option>
+        <option value="journee">Une journée complète</option>
+        <option value="plus">Deux jours ou plus</option>
+        <option value="inconnu">Je ne sais pas encore</option>
+      </select>
+    </div>
+    <div class="champ">
+      <span class="q">3. Votre terrain</span>
+      <div class="options-radio">
+        <label class="chip-choix"><input type="radio" name="terrain" value="facile" data-label="Plat, facile d'accès" checked>🌳 Plat, facile d'accès</label>
+        <label class="chip-choix"><input type="radio" name="terrain" value="difficile" data-label="En pente, restanques, accès difficile">⛰️ En pente / restanques / accès difficile</label>
+      </div>
+    </div>
+    <div class="champ">
+      <label class="q" for="devis-commune">4. Votre commune</label>
+      <select id="devis-commune"></select>
+    </div>
+    <button type="submit" class="btn">Estimer mon devis</button>
+  </form>
+  <div id="devis-resultat" class="devis-resultat" hidden></div>
 </section>
 
 <section id="equipe">
@@ -294,6 +348,103 @@ function render(d){
 
   // Communes
   document.getElementById('liste-communes').innerHTML = (d.communes||[]).map(c=>`<span class="commune">${esc(c)}</span>`).join('');
+
+  // Simulateur de devis
+  initSimulateur(d);
+}
+
+// ─── Simulateur de devis (estimation indicative, sans backend) ───
+function initSimulateur(d){
+  const form = document.getElementById('form-devis');
+  if(!form) return;
+
+  // Tarifs de base récupérés depuis le contenu (site.json) pour rester cohérents.
+  const tarifs = d.tarifs || [];
+  const prixNum = t => { const m = String(t?.prix||'').match(/\d[\d\s]*/); return m ? parseInt(m[0].replace(/\s/g,''),10) : null; };
+  const tarifDemi = prixNum(tarifs.find(t=>/demi/i.test(t.titre))) ?? 300;
+  const tarifJour = prixNum(tarifs.find(t=>/jour/i.test(t.titre) && !/demi/i.test(t.titre))) ?? 500;
+  const eur = n => n.toLocaleString('fr-FR') + ' €';
+  const prixDemiJournees = hd => Math.floor(hd/2)*tarifJour + (hd%2)*tarifDemi;
+
+  // Cases « travaux » construites depuis les services
+  document.getElementById('devis-services').innerHTML = (d.services||[]).map(s=>
+    `<label class="chip-choix"><input type="checkbox" value="${esc(s.titre)}">${esc(s.emoji)} ${esc(s.titre)}</label>`).join('');
+
+  // Liste des communes
+  const selCommune = document.getElementById('devis-commune');
+  selCommune.innerHTML = '<option value="">— Choisir —</option>'
+    + (d.communes||[]).map(c=>`<option>${esc(c)}</option>`).join('')
+    + '<option>Autre commune</option>';
+
+  // Surbrillance des puces sélectionnées
+  form.querySelectorAll('.chip-choix input').forEach(inp=>{
+    const maj = () => {
+      if(inp.type==='radio') form.querySelectorAll(`input[name="${inp.name}"]`).forEach(o=>o.closest('.chip-choix').classList.toggle('actif',o.checked));
+      else inp.closest('.chip-choix').classList.toggle('actif',inp.checked);
+    };
+    inp.addEventListener('change',maj); maj();
+  });
+
+  const demiJournees = {petit:1, demi:1, journee:2, plus:4};
+  const num = (d.general.telephone||'').replace(/\D/g,'');
+  const tel = '+33' + num.replace(/^0/,'');
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const services = [...form.querySelectorAll('#devis-services input:checked')].map(i=>i.value);
+    const selDuree = form.querySelector('#devis-duree');
+    const duree = selDuree.value;
+    const dureeLabel = selDuree.selectedOptions[0].text;
+    const terrainInp = form.querySelector('input[name="terrain"]:checked');
+    const terrainLabel = terrainInp ? terrainInp.dataset.label : '';
+    const difficile = terrainInp && terrainInp.value === 'difficile';
+    const commune = form.querySelector('#devis-commune').value;
+
+    // Estimation
+    let montant;
+    if(duree === 'inconnu'){
+      montant = 'Estimation sur mesure';
+    } else if(duree === 'plus'){
+      montant = 'à partir de ' + eur(prixDemiJournees(demiJournees.plus));
+    } else {
+      const basHD = demiJournees[duree];
+      const hautHD = basHD + (difficile ? 1 : 0);
+      const bas = prixDemiJournees(basHD), haut = prixDemiJournees(hautHD);
+      montant = bas === haut ? '≈ ' + eur(bas) : 'entre ' + eur(bas) + ' et ' + eur(haut);
+    }
+
+    const ligne = (label,val) => `<li><span>${label} :</span> ${esc(val)}</li>`;
+    const recap = [
+      ligne('Travaux', services.length ? services.join(', ') : 'à préciser'),
+      ligne('Temps estimé', dureeLabel),
+      ligne('Terrain', terrainLabel || '—'),
+      ligne('Commune', commune || 'à préciser')
+    ].join('');
+
+    // Message pré-rempli pour SMS
+    const corps = [
+      'Bonjour, je souhaite un devis pour des travaux de jardinage.',
+      'Travaux : ' + (services.join(', ') || 'à préciser'),
+      'Temps estimé : ' + dureeLabel,
+      'Terrain : ' + (terrainLabel || '—'),
+      'Commune : ' + (commune || 'à préciser'),
+      'Estimation en ligne : ' + montant.replace(/&nbsp;/g,' ')
+    ].join('\n');
+    const smsHref = 'sms:' + tel + '?body=' + encodeURIComponent(corps);
+
+    const res = document.getElementById('devis-resultat');
+    res.innerHTML = `
+      <h3>Votre estimation indicative</h3>
+      <div class="montant">${montant}</div>
+      <ul class="recap">${recap}</ul>
+      <div class="devis-actions">
+        <a class="btn" href="${smsHref}">📩 Envoyer ces infos par SMS</a>
+        <a class="btn" href="tel:${tel}">📞 Appeler</a>
+      </div>
+      <p class="avert">Estimation indicative basée sur nos forfaits demi-journée (${eur(tarifDemi)}) et journée (${eur(tarifJour)}), 2 jardiniers &amp; matériel inclus. Le devis définitif est gratuit et confirmé lors de la visite sur place.</p>`;
+    res.hidden = false;
+    res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
 }
 
 // En local (localhost/127.0.0.1) on ajoute un paramètre anti-cache pour que chaque F5
