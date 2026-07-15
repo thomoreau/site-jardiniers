@@ -27,7 +27,7 @@ backend:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-site_url: https://jardiniers-des-collines.netlify.app
+site_url: https://site-jardiniers.pages.dev
 # ── fin du bloc à remplacer ──
 
 media_folder: "images/uploads"

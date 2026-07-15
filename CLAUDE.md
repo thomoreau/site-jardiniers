@@ -8,7 +8,7 @@ Le propriétaire travaille sous **Windows avec PowerShell**. Toutes les commande
 
 ## What this is
 
-Single-page marketing site (in French) for **Les Jardiniers des Collines**, a gardening service in the hills around Nice. Static site — no build step, no package manager, no tests. Deployed to Netlify (`jardiniers-des-collines.netlify.app`).
+Single-page marketing site (in French) for **Les Jardiniers des Collines**, a gardening service in the hills around Nice. Static site — no build step, no package manager, no tests. Deployed to Cloudflare Pages (`site-jardiniers.pages.dev`); formerly on Netlify (`jardiniers-des-collines.netlify.app`). See [DEPLOIEMENT.md](DEPLOIEMENT.md).
 
 ## Running locally
 
