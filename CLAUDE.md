@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Environnement
+
+Le propriétaire travaille sous **Windows avec PowerShell**. Toutes les commandes shell proposées ou exécutées doivent être adaptées à PowerShell (et non à bash/POSIX) : utiliser la syntaxe PowerShell (cmdlets, `$env:VAR`, `;` ou `if ($?) {}` pour chaîner, etc.).
+
 ## What this is
 
 Single-page marketing site (in French) for **Les Jardiniers des Collines**, a gardening service in the hills around Nice. Static site — no build step, no package manager, no tests. Deployed to Netlify (`jardiniers-des-collines.netlify.app`).

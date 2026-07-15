@@ -213,12 +213,36 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 // Le contenu du site est chargé depuis content/site.json (modifiable via l'espace admin /admin).
-// Les valeurs ci-dessous servent uniquement de secours si le fichier JSON est introuvable
-// (par exemple en ouvrant index.html directement depuis l'ordinateur sans serveur).
+// Les valeurs ci-dessous servent de secours si le fichier JSON est introuvable — notamment en
+// ouvrant index.html directement depuis l'ordinateur (origine file://) sans serveur : le fetch
+// est alors bloqué et le site s'affiche grâce à ce contenu. En ligne / via un serveur HTTP,
+// le fetch reste prioritaire et reflète les modifications faites dans le CMS.
+// ⚠️ À garder synchronisé avec content/site.json.
 const CONTENU_SECOURS = {
-  general: { nom: "Les Jardiniers des Collines", tagline: "Entretien de jardins & travaux extérieurs sur les collines niçoises", zones_resume: "Nice Nord · Colomars · Aspremont · Castagniers · Carros · et alentours", telephone: "06 75 41 64 87" },
-  services: [], realisations: [], tarifs: [], equipe: [], outils: [], communes: [],
-  note_tarif: "", note_zone: ""
+  general: { nom: "Les Jardiniers des Collines", tagline: "Entretien de jardins & travaux extérieurs sur les collines niçoises", zones_resume: "Nice · Colomars · Aspremont · Castagniers · Carros · et alentours", telephone: "06 75 41 64 87" },
+  services: [
+    { emoji: "🌾", titre: "Débroussaillage", description: "Terrains en friche, restanques, talus. Limitez les risques d'incendies pour cet été.", image: "images/uploads/debroussailleuse-thermique-62-cm-2-temps-debroussailleuse-essence-2en1-coupe-bordure-tete-double-fil-et-deux-lames-.jpg" },
+    { emoji: "✂️", titre: "Taille de haies & petits abattages", description: "Taille d'entretien ou de réduction de haies, élagage des branches hautes à la perche et abattage de petits arbres à la tronçonneuse.", image: "images/uploads/outil-multifonction-thermique-4en1-debroussailleuse-coupe-bordure-elagueuse-taille-haie-517-cm-2t-3cv-2-lames.jpg" },
+    { emoji: "🍂", titre: "Nettoyage & aménagement jardin / terrasse", description: "Ramassage de feuilles, nettoyage de terrasses et allées, petits aménagements : compactage de sol, allées, terrains de pétanque, petites terrasses.", image: "images/uploads/entretien-jardin-2.jpg" },
+    { emoji: "🌱", titre: "Remise en état de jardins", description: "Jardins laissés à l'abandon, préparation avant vente ou location d'une maison.", image: "images/uploads/6f1f82d8-187c-4db9-8732-76c46dbfdbca.webp" }
+  ],
+  realisations: [
+    { titre: "Débroussaillage complet", description: "Planches envahies rendues à nouveau accessibles.", photo_avant: "images/uploads/gemini_generated_image_ca2blhca2blhca2b.png", photo_apres: "images/uploads/gemini_generated_image_mar08emar08emar0-copie.png" },
+    { titre: "Taille de haie", description: "Reprise en main d'une haie non taillée depuis plusieurs années.", photo_avant: "images/uploads/gemini_generated_image_4u8ysc4u8ysc4u8y.png", photo_apres: "images/uploads/gemini_generated_image_ijfqb9ijfqb9ijfq-1-.jpg" },
+    { titre: "Création d'un terrain de pétanque", description: "Terrassement, compactage et finitions.", photo_avant: "images/uploads/gemini_generated_image_pbvjctpbvjctpbvj-1-.jpg", photo_apres: "images/uploads/img_5997-2-.jpg" }
+  ],
+  tarifs: [
+    { titre: "Demi-journée", prix: "300 €", details: ["2 jardiniers · ~4 heures", "Matériel professionnel inclus", "Idéal : haies, nettoyage, entretien"] },
+    { titre: "Journée complète", prix: "500 €", details: ["2 jardiniers · journée entière", "Matériel professionnel inclus", "Idéal : débroussaillage, gros chantiers"] }
+  ],
+  equipe: [
+    { nom: "Raphaël Klinkhamer", role: "Professeur de piano & jardinier passionné", description: "Passionné de jardinage depuis l'enfance, Raphaël cultive son amour des espaces verts entre ses cours de piano. Précis et méticuleux au clavier comme au taille-haie, il apporte à chaque chantier son sens du détail et sa connaissance des plantes de la région.", photo: "images/uploads/gemini_generated_image_tf5ka1tf5ka1tf5k.png" },
+    { nom: "Thomas Moreau", role: "L'énergie du village", description: "Le reste de l'année dans des bureaux parisiens, Thomas retrouve chaque été son village des collines niçoises. Son terrain de pétanque terminé de ses propres mains, il cherche de nouveaux projets pour rester au grand air et votre jardin pourrait bien être le prochain.", photo: "images/uploads/img_5790.jpg" }
+  ],
+  outils: ["🌾 Débroussailleuse", "✂️ Taille-haie", "🍃 Souffleuse", "🧱 Plaque vibrante", "🌳 Élagueuse sur perche", "🪚 Tronçonneuse", "⛏️ Pioche & outils manuels", "🛞 Brouette", "🚛 Remorque", "🪜 Escabeau / Echelle"],
+  communes: ["Nice", "Fabron", "Saint-Pancrace", "Colomars", "Aspremont", "Castagniers", "Carros", "Saint-Blaise", "Tourrette-Levens", "Falicon", "Gattières", "La Gaude", "Levens", "Saint-Martin-du-Var"],
+  note_tarif: "Devis gratuit sur simple appel + photo. Pour les chantiers de plusieurs jours, contactez-nous : 06 75 41 64 87 nous établissons un prix ensemble.",
+  note_zone: "Votre village n'est pas dans la liste ? Appelez-nous : si c'est à moins de 45 minutes de Nice, nous venons."
 };
 
 function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
@@ -272,7 +296,12 @@ function render(d){
   document.getElementById('liste-communes').innerHTML = (d.communes||[]).map(c=>`<span class="commune">${esc(c)}</span>`).join('');
 }
 
-fetch('content/site.json')
+// En local (localhost/127.0.0.1) on ajoute un paramètre anti-cache pour que chaque F5
+// recharge la dernière version de content/site.json. En production, aucun paramètre :
+// le navigateur des visiteurs met le fichier en cache normalement.
+const enLocal = ['localhost','127.0.0.1','[::1]'].includes(location.hostname);
+const urlContenu = 'content/site.json' + (enLocal ? '?t=' + Date.now() : '');
+fetch(urlContenu)
   .then(r=>{ if(!r.ok) throw new Error(); return r.json(); })
   .then(render)
   .catch(()=>render(CONTENU_SECOURS));
